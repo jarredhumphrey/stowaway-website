@@ -45,7 +45,7 @@ export default function Home(): JSX.Element {
           </h1>
           <p className={styles.heroSubtitle}>
             Connects to your app via the Hermes CDP bridge. Walks the React fiber tree.
-            Triggers interactions directly — no Appium, no coordinate math, no YAML.
+            Triggers interactions directly - no Appium, no coordinate math, no YAML.
           </p>
           <div className={styles.installRow}>
             npm install --save-dev stowaway
@@ -76,7 +76,7 @@ export default function Home(): JSX.Element {
                 <h3>Find</h3>
                 <p>
                   Traverses the live React fiber tree to locate elements by <code>testID</code>,
-                  component name, text content, or accessibility attributes — the same tree
+                  component name, text content, or accessibility attributes - the same tree
                   React DevTools reads.
                 </p>
               </div>
@@ -84,7 +84,7 @@ export default function Home(): JSX.Element {
                 <div className={styles.stepNum}>3</div>
                 <h3>Interact</h3>
                 <p>
-                  Calls React prop handlers directly — <code>onPress</code>,{' '}
+                  Calls React prop handlers directly - <code>onPress</code>,{' '}
                   <code>onChangeText</code>, <code>onValueChange</code>. No native event dispatch,
                   no coordinate math, no gesture simulation.
                 </p>
@@ -108,14 +108,14 @@ export default function Home(): JSX.Element {
                 <h3>iOS + Android</h3>
                 <p>
                   Works with iOS Simulators and Android emulators or physical devices.
-                  One test file, two platforms — switch with <code>PLATFORM=android</code>.
+                  One test file, two platforms - switch with <code>PLATFORM=android</code>.
                 </p>
               </div>
               <div className={styles.feature}>
                 <h3>Full TypeScript</h3>
                 <p>
                   All APIs are typed end-to-end. Query results, element methods, config,
-                  and assertions — no <code>any</code>, no casting gymnastics.
+                  and assertions - no <code>any</code>, no casting gymnastics.
                 </p>
               </div>
               <div className={styles.feature}>
@@ -129,7 +129,7 @@ export default function Home(): JSX.Element {
                 <h3>One command to onboard</h3>
                 <p>
                   <code>npx stowaway init</code> scaffolds the entry point, a smoke test,
-                  and npm scripts — from zero to first run in under a minute.
+                  and npm scripts - from zero to first run in under a minute.
                 </p>
               </div>
               <div className={styles.feature}>

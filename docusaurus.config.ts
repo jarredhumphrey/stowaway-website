@@ -93,7 +93,7 @@ const config: Config = {
           ],
         },
       ],
-      copyright: `Copyright © ${new Date().getFullYear()} Stowaway contributors.`,
+      copyright: `Copyright © ${new Date().getFullYear()} Jarred Humphrey.`,
     },
     prism: {
       theme: prismThemes.github,

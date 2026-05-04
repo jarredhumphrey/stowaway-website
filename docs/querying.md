@@ -5,7 +5,7 @@ sidebar_label: Querying
 
 # Querying Elements
 
-`AppSession` provides several methods for locating elements in the React fiber tree. All queries communicate with the live Hermes engine over CDP — there is no DOM, no accessibility tree, and no layout engine involved.
+`AppSession` provides several methods for locating elements in the React fiber tree. All queries communicate with the live Hermes engine over CDP - there is no DOM, no accessibility tree, and no layout engine involved.
 
 ## Selectors
 
@@ -54,7 +54,7 @@ const heading = await app.find({ text: 'plan', exact: false });   // substring
 const heading = await app.find({ text: /choose a plan/i });       // regex
 ```
 
-Use this as a last resort — it's slower than `testID` and brittle if text changes.
+Use this as a last resort - it's slower than `testID` and brittle if text changes.
 
 ### `{ accessibilityLabel: string; exact?: boolean }`
 
@@ -86,7 +86,7 @@ const input = await app.find({ placeholder: 'email', exact: false });
 
 ## `find(selector)`
 
-Returns the first matching `Element`. Throws immediately if nothing matches — use `waitForElement` if the element might not be in the tree yet.
+Returns the first matching `Element`. Throws immediately if nothing matches - use `waitForElement` if the element might not be in the tree yet.
 
 ```ts
 const tab = await app.find({ testID: 'tab-profile' });
@@ -117,7 +117,7 @@ await secondItem.tap();
 Polls until the element appears or `timeout` ms elapses. Accepts any `Selector` or a plain string (treated as `{ testID }`). Throws with a descriptive error on timeout.
 
 ```ts
-// Plain string — shorthand for { testID: 'success-banner' }
+// Plain string - shorthand for { testID: 'success-banner' }
 const banner = await app.waitForElement('success-banner');
 
 // Any selector works
@@ -163,7 +163,7 @@ Same options as `waitForElement`.
 Scrolls the first visible `FlatList` or `ScrollView` in 5 000 px increments, pausing after each step to poll for the element. Returns the element when found; throws on timeout.
 
 ```ts
-// Element is far down a long list — scroll until it appears
+// Element is far down a long list - scroll until it appears
 const item = await app.scrollAndFind('list-item-47', { timeout: 12_000 });
 await item.tap();
 ```
@@ -180,7 +180,7 @@ Option:
 
 ## Checking existence without throwing
 
-`Element.exists()` re-queries the fiber tree by `testID` and returns a boolean — useful inside `waitFor` or for conditional logic without a try/catch:
+`Element.exists()` re-queries the fiber tree by `testID` and returns a boolean - useful inside `waitFor` or for conditional logic without a try/catch:
 
 ```ts
 const el = await app.find({ testID: 'optional-banner' });
@@ -201,11 +201,11 @@ Once you have an `Element`, you can read its properties without re-querying:
 const input = await app.find({ testID: 'input-name' });
 
 await input.text()           // concatenated HostText descendants
-await input.inputValue()     // memoizedProps.value ?? defaultValue ?? '' — for TextInput
-await input.prop('value')    // single named prop — sugar over (await input.props()).value
+await input.inputValue()     // memoizedProps.value ?? defaultValue ?? '' - for TextInput
+await input.prop('value')    // single named prop - sugar over (await input.props()).value
 await input.props()          // all serializable memoizedProps (strings, numbers, booleans, null) + accessibilityState
 await input.isEnabled()      // false if disabled or accessibilityState.disabled
-await input.isChecked()      // !!memoizedProps.value — for Switch / checkbox
+await input.isChecked()      // !!memoizedProps.value - for Switch / checkbox
 await input.isFocused()      // true if accessibilityState.focused
 await input.isVisible()      // alias for exists()
 await input.getFrame()       // { x, y, width, height } via stateNode.measure(), or null
@@ -235,7 +235,7 @@ expect(await input.prop('value')).toBe('Jane');
 ```ts
 const card = await app.find({ testID: 'product-card-1' });
 
-// Only searches within card's subtree — won't match buttons on other cards
+// Only searches within card's subtree - won't match buttons on other cards
 const addBtn = await card.find({ testID: 'btn-add-to-cart' });
 await addBtn.tap();
 ```
@@ -247,12 +247,12 @@ await addBtn.tap();
 If you can't find an element and aren't sure what `testID` values are available, use `app.printTree()` in a temporary test:
 
 ```ts
-it('debug — print fiber tree', async (app: AppSession) => {
+it('debug - print fiber tree', async (app: AppSession) => {
   await app.printTree();
 });
 ```
 
-This prints one line per node — `ComponentName [testID]` — indented by depth. For example:
+This prints one line per node - `ComponentName [testID]` - indented by depth. For example:
 
 ```
 ButtonsScreen

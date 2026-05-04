@@ -92,7 +92,7 @@
   text-align: center;
 }
 
-/* How it works — 3 steps */
+/* How it works - 3 steps */
 .steps {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

@@ -172,7 +172,7 @@ await expect(loadingSpinner).toBeVisible();
 
 ### `toBeEnabled()`
 
-Polls until `element.isEnabled()` returns `true` — i.e. the element is not disabled.
+Polls until `element.isEnabled()` returns `true` - i.e. the element is not disabled.
 
 ```ts
 const submitBtn = await app.find({ testID: 'btn-submit' });
@@ -190,7 +190,7 @@ await expect(btn).toBeDisabled();
 
 ### `toBeHidden()`
 
-Polls until `element.isVisible()` returns `false` — i.e. the element is no longer in the committed fiber tree. Convenient alternative to `waitForElementToDisappear` when you already have an `Element` reference.
+Polls until `element.isVisible()` returns `false` - i.e. the element is no longer in the committed fiber tree. Convenient alternative to `waitForElementToDisappear` when you already have an `Element` reference.
 
 ```ts
 const spinner = await app.find({ testID: 'loading-spinner' });
@@ -209,7 +209,7 @@ await expect(sw).toBeChecked();
 
 ### `toHaveFocus()`
 
-Polls until `element.isFocused()` returns `true` — i.e. `accessibilityState.focused` is set.
+Polls until `element.isFocused()` returns `true` - i.e. `accessibilityState.focused` is set.
 
 ```ts
 const input = await app.find({ testID: 'input-name' });
@@ -246,7 +246,7 @@ expect(props).not.toHaveAccessibilityRole('none');
 
 ## Soft assertions
 
-`expect.soft(value)` works exactly like `expect(value)` — it supports the full sync and async matcher API including `.not` — but **does not stop the test on failure**. Failures are queued and reported together as a single combined error at the end of the test.
+`expect.soft(value)` works exactly like `expect(value)` - it supports the full sync and async matcher API including `.not` - but **does not stop the test on failure**. Failures are queued and reported together as a single combined error at the end of the test.
 
 ```ts
 const value = await app.find({ testID: 'counter-value' });
