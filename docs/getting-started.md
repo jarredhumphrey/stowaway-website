@@ -1,7 +1,3 @@
----
-sidebar_position: 1
----
-
 # Getting Started
 
 ## Requirements
@@ -27,8 +23,8 @@ npx stowaway init
 
 It will ask for your bundle ID and output directory, then generate:
 
-- `e2e/run.ts` - the test entry point
-- `e2e/smoke.spec.ts` - a smoke test that launches the app and prints the component tree
+- `e2e/run.ts` — the test entry point
+- `e2e/smoke.spec.ts` — a smoke test that launches the app and prints the component tree
 - `e2e:ios` / `e2e:android` scripts in your `package.json`
 
 Boot your simulator or emulator, start Metro, then run:
@@ -37,7 +33,7 @@ Boot your simulator or emulator, start Metro, then run:
 npm run e2e:ios
 ```
 
-The smoke test prints your component tree to stdout - use that output to find `testID`s and write your first real spec.
+The smoke test prints your component tree to stdout — use that output to find `testID`s and write your first real spec.
 
 ## Manual setup
 
@@ -68,18 +64,18 @@ All configuration comes from environment variables, read once at startup via `lo
 | Variable | Default | Notes |
 |---|---|---|
 | `PLATFORM` | `ios` | `ios` or `android` |
-| `BUNDLE_ID` | required | e.g. `com.myorg.myapp` - throws if absent |
+| `BUNDLE_ID` | required | e.g. `com.myorg.myapp` — throws if absent |
 | `METRO_PORT` | `8081` | Port Metro is listening on |
 | `DEFAULT_TIMEOUT` | `10000` | Default wait timeout in ms |
 | `TEST_RESULTS_DIR` | `test-results` | Where JSON/XML results and screenshots land |
-| `SUITE_NAME` | - | Optional label printed in the run header |
-| `VERBOSE` | - | `1` or `true` - prints each test step as it completes; also enabled by `--verbose` CLI flag |
-| `SLOW_REPLAY` | - | `1` or `true` - adds a delay between trace steps when generating the failure replay video |
+| `SUITE_NAME` | — | Optional label printed in the run header |
+| `VERBOSE` | — | `1` or `true` — prints each test step as it completes; also enabled by `--verbose` CLI flag |
+| `SLOW_REPLAY` | — | `1` or `true` — adds a delay between trace steps when generating the failure replay video |
 | `SLOW_REPLAY_DELAY` | `800` | Delay in ms between steps when `SLOW_REPLAY` is enabled |
 
 ## Writing your first spec
 
-Spec files export nothing - they register suites as a side effect when imported. The `app` parameter is an `AppSession` wired up to the live running app.
+Spec files export nothing — they register suites as a side effect when imported. The `app` parameter is an `AppSession` wired up to the live running app.
 
 ```ts
 // e2e/home.spec.ts
@@ -101,13 +97,13 @@ describe('Home screen', () => {
 
 Key things to know up front:
 
-- The app is **relaunched between every test** automatically - you always start from a clean state.
-- Elements found in one test are **invalid in the next** - always re-query; never store `Element` references across test boundaries.
+- The app is **relaunched between every test** automatically — you always start from a clean state.
+- Elements found in one test are **invalid in the next** — always re-query; never store `Element` references across test boundaries.
 - Tests within a `describe` share `beforeEach`/`afterEach` hooks, but not any other state.
 
 ## Entry point
 
-Create a `run.ts` alongside your spec files. The simplest form passes the directory - the runner auto-discovers every `*.spec.ts` file inside it alphabetically:
+Create a `run.ts` alongside your spec files. The simplest form passes the directory — the runner auto-discovers every `*.spec.ts` file inside it alphabetically:
 
 ```ts
 // e2e/run.ts

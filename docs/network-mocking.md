@@ -1,10 +1,6 @@
----
-sidebar_position: 6
----
-
 # Network Mocking
 
-Stowaway can intercept `fetch` calls inside the running app and return controlled responses. The mock is injected into the Hermes engine alongside the test bridge - no proxy server, no native interception, no extra infrastructure.
+Stowaway can intercept `fetch` calls inside the running app and return controlled responses. The mock is injected into the Hermes engine alongside the test bridge — no proxy server, no native interception, no extra infrastructure.
 
 > **Scope:** Only `fetch` is intercepted. Native networking that bypasses the JS layer (e.g. some native modules) is not affected. `XMLHttpRequest` / `axios` support can be added in a future release.
 
@@ -37,19 +33,19 @@ describe('Login screen', () => {
 Pass a `string` for exact URL matching, or a `RegExp` for pattern matching.
 
 ```ts
-// Exact match - the full URL must match character for character
+// Exact match — the full URL must match character for character
 await app.mockNetwork(
   { url: 'https://api.example.com/users/42' },
   { status: 200, body: { id: 42, name: 'Jane' } },
 );
 
-// Regex match - any URL containing "/api/users/" followed by digits
+// Regex match — any URL containing "/api/users/" followed by digits
 await app.mockNetwork(
   { url: /\/api\/users\/\d+/ },
   { status: 200, body: { id: 1, name: 'Jane' } },
 );
 
-// Regex with no method constraint - matches any HTTP method
+// Regex with no method constraint — matches any HTTP method
 await app.mockNetwork(
   { url: /\/api\/products/ },
   { status: 200, body: [] },
@@ -69,7 +65,7 @@ await app.mockNetwork(
   { status: 200, body: { token: 'abc123' } },
 );
 
-// Intercepts GET, POST, PATCH - any method to this URL
+// Intercepts GET, POST, PATCH — any method to this URL
 await app.mockNetwork(
   { url: 'https://api.example.com/session' },
   { status: 200, body: {} },
@@ -87,7 +83,7 @@ type NetworkResponse = {
   status?: number;           // default: 200
   headers?: Record<string, string>;
   body?: unknown;            // JSON-serialized; objects, arrays, strings, null
-  delay?: number;            // ms to wait before resolving - simulates latency
+  delay?: number;            // ms to wait before resolving — simulates latency
 };
 ```
 
@@ -103,7 +99,7 @@ await app.mockNetwork(
   { status: 500, body: { error: 'Storage limit exceeded' } },
 );
 
-// Slow network - 2 s delay
+// Slow network — 2 s delay
 await app.mockNetwork(
   { url: /\/api\/report/ },
   { status: 200, body: { ready: true }, delay: 2_000 },
@@ -153,8 +149,8 @@ Mocks are scoped to where they are registered and cleared automatically when tha
 | Registered in | Cleared after |
 |---|---|
 | `beforeAll` | The entire suite (`afterAll` completes) |
-| `beforeEach` | Each test (naturally - the app relaunches before the next test) |
-| `it()` body | That test (naturally - the app relaunches before the next test) |
+| `beforeEach` | Each test (naturally — the app relaunches before the next test) |
+| `it()` body | That test (naturally — the app relaunches before the next test) |
 
 **How it works:** The app is relaunched between every test (`session.reset()`), which re-injects the bridge and resets the mock registry. Mocks registered in `beforeAll` are remembered by the runner and re-applied automatically after each relaunch so they persist across all tests in the suite.
 
@@ -169,7 +165,7 @@ describe('User profile', () => {
   });
 
   it('shows the display name', async (app) => {
-    // profile mock is active - no setup needed
+    // profile mock is active — no setup needed
     const label = await app.waitForElement('profile-name');
     expect(await label.text()).toBe('Jane');
   });
@@ -230,13 +226,13 @@ The request log is cleared on each app relaunch (between tests). Within a single
 `waitForRequest(matcher, opts?)` polls the request log until an entry matching `matcher` appears, then returns it. The matcher accepts the same forms as `mockNetwork`:
 
 ```ts
-// string - exact URL
+// string — exact URL
 const req = await app.waitForRequest('https://api.example.com/users/1');
 
-// RegExp - URL pattern
+// RegExp — URL pattern
 const req = await app.waitForRequest(/\/users\/\d+/);
 
-// NetworkMatcher object - URL + optional method filter
+// NetworkMatcher object — URL + optional method filter
 const req = await app.waitForRequest({ url: /\/users\/\d+/, method: 'POST' });
 ```
 

@@ -1,10 +1,6 @@
----
-sidebar_position: 3
----
-
 # Interactions
 
-All interaction methods communicate with the live Hermes engine. They call React prop handlers directly - there is no coordinate math, no gesture system, and no native event dispatch involved.
+All interaction methods communicate with the live Hermes engine. They call React prop handlers directly — there is no coordinate math, no gesture system, and no native event dispatch involved.
 
 ---
 
@@ -57,7 +53,7 @@ const props = await input.props();
 expect(props.value).toBe('user@example.com');
 ```
 
-`typeText` replaces the current value - it does not append. If you want to append, read the current value from `props()` and pass the combined string.
+`typeText` replaces the current value — it does not append. If you want to append, read the current value from `props()` and pass the combined string.
 
 ### `element.clearText()`
 
@@ -81,7 +77,7 @@ await app.waitForElement('search-results');
 
 ### `element.pressKey(key)`
 
-Fires `onKeyPress({ nativeEvent: { key } })` on the nearest ancestor that has the handler. Useful for apps that react to specific keys - advancing focus on `'Enter'`, clearing on `'Backspace'`, dismissing on `'Escape'`. Throws if no `onKeyPress` handler is found.
+Fires `onKeyPress({ nativeEvent: { key } })` on the nearest ancestor that has the handler. Useful for apps that react to specific keys — advancing focus on `'Enter'`, clearing on `'Backspace'`, dismissing on `'Escape'`. Throws if no `onKeyPress` handler is found.
 
 ```ts
 const input = await app.find({ testID: 'input-name' });
@@ -146,11 +142,11 @@ expect(await sw.isChecked()).toBe(false);
 
 ### `element.isChecked()`
 
-Returns `!!memoizedProps.value` - reads the current controlled value of a `Switch` or similar boolean toggle.
+Returns `!!memoizedProps.value` — reads the current controlled value of a `Switch` or similar boolean toggle.
 
 ### `element.selectOption(value)`
 
-Calls `onValueChange(value)` on the nearest ancestor with that handler. Works with any component that exposes `onValueChange` - custom pickers, segmented controls, `Picker`, etc. Throws if no handler is found.
+Calls `onValueChange(value)` on the nearest ancestor with that handler. Works with any component that exposes `onValueChange` — custom pickers, segmented controls, `Picker`, etc. Throws if no handler is found.
 
 ```ts
 const picker = await app.find({ testID: 'picker-theme' });
@@ -236,12 +232,26 @@ describe('Checkout', () => {
   });
 
   it('transitions to the confirmation screen', async (app) => {
-    // animated transitions complete instantly - no waitForElement timing issues
+    // animated transitions complete instantly — no waitForElement timing issues
   });
 });
 ```
 
 Re-apply after each `reset()` if needed, since the patch is scoped to a single app launch.
+
+### `app.waitForInteractions(opts?)`
+
+Sleeps for a configurable delay (default 500 ms) on the test runner side. Use after `waitForElement` resolves to give React Navigation's slide transitions or other native-driven animations time to finish before interacting.
+
+```ts
+const input = await app.waitForElement('email-input');
+await app.waitForInteractions();
+await input.typeText('user@example.com');
+```
+
+Why a fixed delay? React Navigation's stack/tab transitions run on the native thread and don't trigger any further React commits when they complete, so there's no fiber-level signal to wait on. A 500 ms delay covers the default 300–400 ms transition with buffer; override via `{ delay: 800 }` for slower animations.
+
+If you've called `disableAnimations()`, this is unnecessary — transitions complete instantly.
 
 ---
 
@@ -364,7 +374,7 @@ All traversal methods return fresh `Element` instances backed by the live fiber,
 
 ### `element.parent()`
 
-Returns the nearest meaningful ancestor - a named composite component (function or class component with a displayName/name) or a native `HostComponent` (View, Text, etc.). Anonymous HOC shells, `Context.Provider`, `Fragment`, and other transparent wrappers are skipped. Throws if no meaningful parent is found before the fiber root.
+Returns the nearest meaningful ancestor — a named composite component (function or class component with a displayName/name) or a native `HostComponent` (View, Text, etc.). Anonymous HOC shells, `Context.Provider`, `Fragment`, and other transparent wrappers are skipped. Throws if no meaningful parent is found before the fiber root.
 
 ```ts
 const successText = await app.find({ testID: 'form-success-text' });
@@ -376,7 +386,7 @@ expect(props.testID).toBe('form-success');
 
 ### `element.siblings()`
 
-Returns all fiber siblings - nodes that share the same parent - excluding the element itself. Order follows fiber sibling link order (same as React render order).
+Returns all fiber siblings — nodes that share the same parent — excluding the element itself. Order follows fiber sibling link order (same as React render order).
 
 ```ts
 const firstSummary = await app.find({ testID: 'summary-plan' });
@@ -416,7 +426,7 @@ expect(await prev!.text()).toBe('Theme: system');
 
 ### `element.closest(selector)`
 
-Walks up the ancestor chain via `fiber.return` and returns the first ancestor that matches `selector`. Supports the same `Selector` union as `app.find` - testID, component name, text, accessibilityLabel, accessibilityRole, and placeholder - including `RegExp` text matching. Throws if no match is found before the fiber root.
+Walks up the ancestor chain via `fiber.return` and returns the first ancestor that matches `selector`. Supports the same `Selector` union as `app.find` — testID, component name, text, accessibilityLabel, accessibilityRole, and placeholder — including `RegExp` text matching. Throws if no match is found before the fiber root.
 
 ```ts
 // Climb from a child text element to its named container
@@ -538,16 +548,16 @@ it('handles a crash gracefully', async (app) => {
   try {
     await (await app.find({ testID: 'btn-crash-trigger' })).tap();
   } catch (err) {
-    // err.message will say "CDP connection lost - the app may have crashed"
+    // err.message will say "CDP connection lost — the app may have crashed"
     if (!(await app.isAppRunning())) {
-      console.log('App crashed - check crash logs in ~/Library/Logs/DiagnosticReports');
+      console.log('App crashed — check crash logs in ~/Library/Logs/DiagnosticReports');
     }
     throw err;
   }
 });
 ```
 
-The runner does not call `isAppRunning()` automatically; the improved error message ("CDP connection lost - the app may have crashed") is your first signal, and `isAppRunning()` lets you confirm it programmatically.
+The runner does not call `isAppRunning()` automatically; the improved error message ("CDP connection lost — the app may have crashed") is your first signal, and `isAppRunning()` lets you confirm it programmatically.
 
 ---
 
@@ -562,7 +572,7 @@ const filePath = await app.screenshot('after-login');
 // e.g. "test-results/after-login-1714000000000.png"
 ```
 
-The directory is created automatically if it doesn't exist. Screenshots on failure are captured automatically by the runner - you only need to call this manually for diagnostic captures mid-test.
+The directory is created automatically if it doesn't exist. Screenshots on failure are captured automatically by the runner — you only need to call this manually for diagnostic captures mid-test.
 
 ---
 
@@ -613,7 +623,7 @@ The app should be backgrounded (or in the foreground with a notification handler
 
 ### `app.setStatusBar(opts)`
 
-Overrides status bar content via `xcrun simctl status_bar`. Useful for screenshot consistency and visual regression testing. All fields are optional - omit any you don't want to override.
+Overrides status bar content via `xcrun simctl status_bar`. Useful for screenshot consistency and visual regression testing. All fields are optional — omit any you don't want to override.
 
 ```ts
 await app.setStatusBar({
@@ -701,7 +711,7 @@ The date is serialized as a timestamp and reconstructed as a `Date` object insid
 
 ### `element.slideToValue(value)`
 
-Fires `onValueChange(value)` and - if present on the same node - `onSlidingComplete(value)`. Works with `@react-native-community/slider` and any component that exposes these handlers.
+Fires `onValueChange(value)` and — if present on the same node — `onSlidingComplete(value)`. Works with `@react-native-community/slider` and any component that exposes these handlers.
 
 ```ts
 const slider = await app.find({ testID: 'volume-slider' });

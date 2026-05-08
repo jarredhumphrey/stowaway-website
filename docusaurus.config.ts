@@ -53,6 +53,11 @@ const config: Config = {
           label: "Docs",
         },
         {
+          to: "/changelog",
+          label: "Changelog",
+          position: "left",
+        },
+        {
           href: "https://www.npmjs.com/package/stowaway",
           label: "npm",
           position: "right",
@@ -82,6 +87,7 @@ const config: Config = {
         {
           title: "Links",
           items: [
+            { label: "Changelog", to: "/changelog" },
             {
               label: "npm",
               href: "https://www.npmjs.com/package/stowaway",

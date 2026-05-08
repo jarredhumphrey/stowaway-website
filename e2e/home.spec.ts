@@ -21,4 +21,9 @@ test.describe('Home page', () => {
     await page.goto('/');
     await expect(page.getByRole('link', { name: 'Docs', exact: true })).toBeVisible();
   });
+
+  test('Changelog page loads', async ({ page }) => {
+    await page.goto('/changelog');
+    await expect(page.getByRole('heading', { name: 'Changelog', level: 1 })).toBeVisible();
+  });
 });

@@ -1,7 +1,3 @@
----
-sidebar_position: 5
----
-
 # Test Organisation
 
 ## The registration model
@@ -43,8 +39,8 @@ All hooks receive the `AppSession` as their only argument. They run at these poi
 |---|---|
 | `beforeAll(fn)` | Once before the first test in the suite |
 | `beforeEach(fn)` | Before every test in the suite, after the app relaunches |
-| `afterEach(fn)` | After every test in the suite (errors are swallowed - non-fatal) |
-| `afterAll(fn)` | Once after the last test in the suite (errors are swallowed - non-fatal) |
+| `afterEach(fn)` | After every test in the suite (errors are swallowed — non-fatal) |
+| `afterAll(fn)` | Once after the last test in the suite (errors are swallowed — non-fatal) |
 
 `afterEach` and `afterAll` errors are swallowed so that a cleanup failure doesn't mask the actual test failure.
 
@@ -72,7 +68,7 @@ describe('Cart', () => {
 
 ## Nested describes
 
-`describe` calls can be nested. The runner flattens the tree - all tests from nested suites appear in the parent suite with prefixed names:
+`describe` calls can be nested. The runner flattens the tree — all tests from nested suites appear in the parent suite with prefixed names:
 
 ```ts
 describe('Checkout', () => {
@@ -114,7 +110,7 @@ it.skip('stripe webhook integration (not yet wired up)', async (app) => {
 Marks an entire suite as skipped. All tests inside are recorded as skipped without executing any of them, including hooks.
 
 ```ts
-describe.skip('Payments - requires Stripe sandbox', () => {
+describe.skip('Payments — requires Stripe sandbox', () => {
   it('charges the card', async (app) => { ... });
   it('handles declined cards', async (app) => { ... });
 });
@@ -144,7 +140,7 @@ describe('Profile', () => {
 
 ### `describe.only`
 
-Runs only the marked suite(s). All other suites - across all spec files - are skipped entirely.
+Runs only the marked suite(s). All other suites — across all spec files — are skipped entirely.
 
 ```ts
 describe.only('Auth', () => {
@@ -158,7 +154,7 @@ describe('Settings', () => {
 });
 ```
 
-`describe.only` is global - it affects suites defined in other spec files too, since all files are loaded before any tests run.
+`describe.only` is global — it affects suites defined in other spec files too, since all files are loaded before any tests run.
 
 ---
 
@@ -179,7 +175,7 @@ The default is controlled by the `DEFAULT_TIMEOUT` environment variable (default
 
 ## Retries
 
-Flaky tests can be given extra attempts. The test function is re-called up to `retries` additional times on failure. Each retry uses the same `AppSession` - there is no reset between attempts.
+Flaky tests can be given extra attempts. The test function is re-called up to `retries` additional times on failure. Each retry uses the same `AppSession` — there is no reset between attempts.
 
 ```ts
 it('syncs after network reconnect', async (app) => {
@@ -195,7 +191,7 @@ When all attempts fail, the last error is reported. A pass on any attempt is a p
 let attempts = 0;
 it('passes on the third try', async (_app) => {
   attempts++;
-  if (attempts < 3) throw new Error(`attempt ${attempts} - simulated flake`);
+  if (attempts < 3) throw new Error(`attempt ${attempts} — simulated flake`);
 }, { retries: 2 });
 ```
 
