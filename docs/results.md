@@ -9,7 +9,7 @@ BUNDLE_ID=com.myorg.myapp tsx e2e/run.ts --verbose
 VERBOSE=1 BUNDLE_ID=com.myorg.myapp tsx e2e/run.ts
 ```
 
-In verbose mode, each test prints its name before running, followed by every step as it completes. Only top-level calls from the test are shown — internal polling inside `waitForElement`, `waitForElementToDisappear`, and `scrollAndFind` is suppressed.
+In verbose mode, each test prints its name before running, followed by every step as it completes. Only top-level calls from the test are shown - internal polling inside `waitForElement`, `waitForElementToDisappear`, and `scrollAndFind` is suppressed.
 
 ```
   Form
@@ -71,8 +71,8 @@ Icons:
 | Icon | Meaning |
 |---|---|
 | `✓` (green) | Test passed |
-| `✗` (red) | Test failed — error message printed on the next line |
-| `↷` (yellow) | Test skipped — either explicitly (`it.skip`) or implicitly (filtered by `it.only` or `describe.only`) |
+| `✗` (red) | Test failed - error message printed on the next line |
+| `↷` (yellow) | Test skipped - either explicitly (`it.skip`) or implicitly (filtered by `it.only` or `describe.only`) |
 
 The process exits with code `1` if any test failed, `0` otherwise.
 
@@ -175,7 +175,7 @@ test-results/failure-Auth-resets-password-1714000000000.png
 
 The screenshot path is included in both the console output and the JSON/XML results.
 
-Screenshots are best-effort — if the screenshot itself fails (e.g. the simulator was unresponsive), the original test failure is still recorded normally.
+Screenshots are best-effort - if the screenshot itself fails (e.g. the simulator was unresponsive), the original test failure is still recorded normally.
 
 ### Manual screenshots
 
@@ -199,7 +199,7 @@ Add the results directory to `.gitignore`:
 test-results/
 ```
 
-Screenshots and result files are runtime artifacts — they shouldn't be committed.
+Screenshots and result files are runtime artifacts - they shouldn't be committed.
 
 ---
 

@@ -1,4 +1,4 @@
-# Stowaway — Documentation
+# Stowaway - Documentation
 
 | Guide | What's covered |
 |---|---|

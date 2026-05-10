@@ -7,6 +7,12 @@ description: Stowaway release history and version notes.
 
 All notable changes to Stowaway are documented here. The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.1.0/), and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## 0.2.1
+
+### Fixed
+
+- **Visibility filter no longer rejects screens in state `1` or with `Animated.Value` `activityState`.** The 0.2.0 check rejected fibers whose ancestor chain had `activityState < 2`, which produced false negatives for elements on screens below the top of a stack (state `1` = transitioning/below-top) and during navigation transitions. The check now only rejects when `activityState` is the plain number `0` (fully deactivated). Animated values are skipped - they can't be read reliably from JS - and state `1` is allowed through. This fixes cases where elements like tab bar buttons or items in a horizontal scroll on a stack screen were unfindable.
+
 ## 0.2.0
 
 ### Breaking changes
